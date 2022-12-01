@@ -1,10 +1,22 @@
 const jwt = require('jsonwebtoken');
-const loginBody = require('./joi');
+const { loginBody, createUserBody } = require('./joi');
 
 const validateLogin = (req, res, next) => {
   const user = req.body;
 
   const { error } = loginBody.validate(user);
+
+  if (error) {
+    return res.status(400).json({ message: error.details[0].message });
+  }
+
+  return next();
+};
+
+const validateNewUser = (req, res, next) => {
+  const newUser = req.body;
+  
+  const { error } = createUserBody.validate(newUser);
 
   if (error) {
     return res.status(400).json({ message: error.details[0].message });
@@ -38,5 +50,6 @@ const authMiddleware = (req, res, next) => {
 
 module.exports = {
   validateLogin,
+  validateNewUser,
   authMiddleware,
 };
