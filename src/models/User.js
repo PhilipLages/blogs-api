@@ -1,8 +1,12 @@
 'use strict';
 
-module.exports = (sequelize, DataTypes) => {
+const UserModel = (sequelize, DataTypes) => {
   const user = sequelize.define('User', {
-    id: DataTypes.NUMBER,
+    id: { 
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     displayName: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
@@ -20,5 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 
   return user;
 };
+
+module.exports = UserModel;
 
 //npx sequelize model:generate --name --attributes --underscored
