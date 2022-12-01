@@ -7,13 +7,21 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        field: 'post_id'
+        field: 'post_id',
+        references: {
+          model: 'blog_posts',
+          key: 'id'
+        }
       },
       categoryId: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        field: 'category_id'
+        field: 'category_id',
+        references: {
+          model: 'categories',
+          key: 'id'
+        }
       },
     });
   },
