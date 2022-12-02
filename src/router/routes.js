@@ -1,12 +1,15 @@
 const express = require('express');
 const userController = require('../controllers/user.controller');
 const categoryController = require('../controllers/category.controller');
+const blogPostController = require('../controllers/blogPost.controller');
 const { 
   validateLogin, 
   validateNewUser, 
   authMiddleware, 
 } = require('../middlewares/user.middlewares');
-const { validateNewCategory } = require('../middlewares/category.middleware');
+const { 
+  validateNewCategory,
+} = require('../middlewares/category.middleware');
 
 const router = express.Router();
 
@@ -21,6 +24,8 @@ router.get('/user/:id', userController.getUserById);
 router.post('/categories', validateNewCategory, categoryController.createCategory);
 
 router.get('/categories', categoryController.getAllCategories);
+
+router.get('/post', blogPostController.getAllPosts);
 
 router.get('/user', userController.getAllUsers);
 

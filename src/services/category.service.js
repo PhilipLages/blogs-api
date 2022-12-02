@@ -20,7 +20,7 @@ const getAllCategories = async () => {
   }
 
   return { status: 201, result };  
-};
+}; 
 
 module.exports = {
   createCategory,

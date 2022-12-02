@@ -15,10 +15,8 @@ const UserModel = (sequelize, DataTypes) => {
     sequelize,
     underscored: true,
     timestamps: false,
-    scopes: { 
-      withoutPassword: {
-        attributes: { exclude: ['password'] }
-      }
+    defaultScope: { 
+      attributes: { exclude: ['password'] }     
      }
   });
 

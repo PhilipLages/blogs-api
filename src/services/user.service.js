@@ -31,7 +31,7 @@ const createUser = async (newUser) => {
 };
 
 const getAllUsers = async () => {
-  const result = await User.scope('withoutPassword').findAll();
+  const result = await User.findAll();
 
   if (!result) {
     return { status: 404, result: { message: 'No user found' } };
@@ -41,7 +41,7 @@ const getAllUsers = async () => {
 };
 
 const getUserById = async (id) => {
-  const result = await User.scope('withoutPassword').findOne({ where: { id } });
+  const result = await User.findOne({ where: { id } });
 
   if (!result) {
     return { status: 404, result: { message: 'User dos not exist' } };
