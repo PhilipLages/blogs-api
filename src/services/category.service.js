@@ -12,6 +12,17 @@ const createCategory = async (name) => {
   return { status: 201, result };  
 };
 
+const getAllCategories = async () => {
+  const result = await Category.findAll();
+
+  if (!result) {
+    return { status: 400, result: { message: 'No categories found' } };
+  }
+
+  return { status: 201, result };  
+};
+
 module.exports = {
   createCategory,
+  getAllCategories,
 };

@@ -20,6 +20,8 @@ router.get('/user/:id', userController.getUserById);
 
 router.post('/categories', validateNewCategory, categoryController.createCategory);
 
+router.get('/categories', categoryController.getAllCategories);
+
 router.get('/user', userController.getAllUsers);
 
 module.exports = router;
