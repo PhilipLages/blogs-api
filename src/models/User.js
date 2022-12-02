@@ -14,7 +14,12 @@ const UserModel = (sequelize, DataTypes) => {
   }, {
     sequelize,
     underscored: true,
-    timestamps: false
+    timestamps: false,
+    scopes: { 
+      withoutPassword: {
+        attributes: { exclude: ['password'] }
+      }
+     }
   });
 
   user.associate = (models) => {

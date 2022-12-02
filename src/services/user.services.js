@@ -30,7 +30,29 @@ const createUser = async (newUser) => {
   return { status: 201, result: { token } };
 };
 
+const getAllUsers = async () => {
+  const result = await User.scope('withoutPassword').findAll();
+
+  if (!result) {
+    return { status: 404, result: { message: 'No user found' } };
+  }
+
+  return { status: 200, result };
+};
+
+const getUserById = async (id) => {
+  const result = await User.scope('withoutPassword').findOne({ where: { id } });
+
+  if (!result) {
+    return { status: 404, result: { message: 'User dos not exist' } };
+  }
+
+  return { status: 200, result };
+};
+
 module.exports = {
   login,
   createUser,
+  getAllUsers,
+  getUserById,
 };
