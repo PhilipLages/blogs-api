@@ -1,10 +1,12 @@
 const express = require('express');
 const userController = require('../controllers/user.controller');
+const categoryController = require('../controllers/category.controller');
 const { 
   validateLogin, 
   validateNewUser, 
   authMiddleware, 
 } = require('../middlewares/user.middlewares');
+const { validateNewCategory } = require('../middlewares/category.middleware');
 
 const router = express.Router();
 
@@ -14,8 +16,10 @@ router.post('/user', validateNewUser, userController.createUser);
 
 router.use(authMiddleware);
 
-router.get('/user', userController.getAllUsers);
-
 router.get('/user/:id', userController.getUserById);
+
+router.post('/categories', validateNewCategory, categoryController.createCategory);
+
+router.get('/user', userController.getAllUsers);
 
 module.exports = router;

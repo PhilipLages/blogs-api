@@ -20,7 +20,14 @@ const createUserBody = Joi.object({
   'string.pattern.base': '{#label} must be a valid email',
 });
 
+const createCategoryBody = Joi.object({
+  name: Joi.string().required(),
+}).required().messages({
+  'string.empty': '{#label} is required',
+});
+
 module.exports = {
   loginBody,
   createUserBody,
+  createCategoryBody,
 };
