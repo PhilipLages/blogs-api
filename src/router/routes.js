@@ -20,6 +20,8 @@ router.post('/user', validateNewUser, userController.createUser);
 
 router.use(authMiddleware);
 
+router.get('/post/search', blogPostController.getPostBySearchTerm);
+
 router.get('/user/:id', userController.getUserById);
 
 router.get('/post/:id', blogPostController.getPostById);
