@@ -107,10 +107,15 @@ const getPostBySearchTerm = async (term) => {
   return { status: 200, result };
 };
 
+const createPost = async ({ title, content, CategoryIds }) => {
+  
+};
+
 module.exports = {
   getAllPosts,
   getPostById,
   updatePost,
   deletePost,
   getPostBySearchTerm,
+  createPost,
 };

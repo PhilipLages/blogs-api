@@ -51,10 +51,21 @@ const deletePost = async (req, res) => {
 
 const getPostBySearchTerm = async (req, res) => {
   const { q } = req.query;
-  console.log(q);
 
   try {
     const { status, result } = await blogPostService.getPostBySearchTerm(q);
+
+    return res.status(status).json(result);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+const createPost = async (req, res) => {
+  const newPost = req.body;
+
+  try {
+    const { status, result } = await blogPostService.createPost(newPost);
 
     return res.status(status).json(result);
   } catch (error) {
@@ -68,4 +79,5 @@ module.exports = {
   updatePost,
   deletePost,
   getPostBySearchTerm,
+  createPost,
 };

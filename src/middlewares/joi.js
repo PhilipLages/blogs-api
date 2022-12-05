@@ -33,9 +33,19 @@ const createCategoryBody = Joi.object({
   'string.empty': '{#label} is required',
 });
 
+const newPostBody = Joi.object({
+  title: Joi.string().required(),
+  content: Joi.string().required(),
+  categoryIds: Joi.array().required(),
+}).required().messages({
+  'string.empty': 'Some required fields are missing',
+  'array.empty': 'one or more {$label} not found',
+});
+
 module.exports = {
   loginBody,
   createUserBody,
   createCategoryBody,
   updatedPostBody,
+  newPostBody,
 };

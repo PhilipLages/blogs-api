@@ -10,7 +10,7 @@ const {
 const { 
   validateNewCategory,
 } = require('../middlewares/category.middleware');
-const { validateUpdatedPost } = require('../middlewares/blogPost.middleware');
+const { validateUpdatedPost, validateNewPost } = require('../middlewares/blogPost.middleware');
 
 const router = express.Router();
 
@@ -29,6 +29,8 @@ router.get('/post/:id', blogPostController.getPostById);
 router.put('/post/:id', validateUpdatedPost, blogPostController.updatePost);
 
 router.delete('/post/:id', blogPostController.deletePost);
+
+router.post('/post', validateNewPost, blogPostController.createPost);
 
 router.post('/categories', validateNewCategory, categoryController.createCategory);
 
