@@ -21,6 +21,8 @@ router.use(authMiddleware);
 
 router.get('/user/:id', userController.getUserById);
 
+router.get('/post/:id', blogPostController.getPostById);
+
 router.post('/categories', validateNewCategory, categoryController.createCategory);
 
 router.get('/categories', categoryController.getAllCategories);
