@@ -24,10 +24,11 @@ const getPostById = async (req, res) => {
 
 const updatePost = async (req, res) => {
   const { id } = req.params;
+  const { userId } = req;
   const updatedPost = req.body;
 
   try {
-    const { status, result } = await blogPostService.updatePost(id, updatedPost);
+    const { status, result } = await blogPostService.updatePost(id, userId, updatedPost);
 
     return res.status(status).json(result);
   } catch (error) {
@@ -35,8 +36,22 @@ const updatePost = async (req, res) => {
   }
 };
 
+const deletePost = async (req, res) => {
+  const { id } = req.params;
+  const { userId } = req;
+
+  try {
+    const { status, result } = await blogPostService.deletePost(id, userId);
+
+    return res.status(status).json(result);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getAllPosts,
   getPostById,
   updatePost,
+  deletePost,
 };

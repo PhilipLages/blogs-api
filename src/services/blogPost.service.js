@@ -45,7 +45,17 @@ const getPostById = async (id) => {
   return { status: 200, result };
 };
 
-const updatePost = async (id, { title, content }) => {
+const updatePost = async (id, userId, { title, content }) => {
+  const result = await BlogPost.findByPk(id);
+
+  if (!result) {
+    return { status: 404, result: { message: 'Post does not exist' } };
+  }
+
+  if (result.userId !== userId) {
+    return { status: 401, result: { message: 'Unauthorized user' } };
+  }
+  
   await BlogPost.update({ 
     title,
     content,
@@ -54,13 +64,30 @@ const updatePost = async (id, { title, content }) => {
     where: { id },
    });
 
-   const { result } = await getPostById(id);
+   const updatedPost = await getPostById(id);
 
-  return { status: 200, result };
+  return { status: 200, result: updatedPost };
+};
+
+const deletePost = async (id, userId) => {
+  const result = await BlogPost.findByPk(id);
+
+  if (!result) {
+    return { status: 404, result: { message: 'Post does not exist' } };
+  }
+
+  if (result.userId !== userId) {
+    return { status: 401, result: { message: 'Unauthorized user' } };
+  }
+  
+  await BlogPost.destroy({ where: { id } });
+
+  return { status: 204, result: null };
 };
 
 module.exports = {
   getAllPosts,
   getPostById,
   updatePost,
+  deletePost,
 };

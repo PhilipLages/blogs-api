@@ -1,16 +1,5 @@
 const { updatedPostBody } = require('./joi');
 
-const validatePostAuthor = (req, res, next) => {
-  const { userId } = req;
-  const { id } = req.params;
-
-    if (Number(id) !== userId) {
-      return res.status(401).json({ message: 'Unauthorized user' });
-    }
-
-  return next();
-};
-
 const validateUpdatedPost = (req, res, next) => {
   const updatedPost = req.body;
 
@@ -24,6 +13,5 @@ const validateUpdatedPost = (req, res, next) => {
 };
 
 module.exports = {
-  validatePostAuthor,
   validateUpdatedPost,
 };
