@@ -36,4 +36,6 @@ router.get('/post', blogPostController.getAllPosts);
 
 router.get('/user', userController.getAllUsers);
 
+router.delete('/user/me', userController.deleteUser);
+
 module.exports = router;
