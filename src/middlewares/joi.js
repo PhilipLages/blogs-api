@@ -9,6 +9,13 @@ const loginBody = Joi.object({
   'string.empty': 'Some required fields are missing',
 });
 
+const updatedPostBody = Joi.object({
+  title: Joi.string().required(),
+  content: Joi.string().required(),
+}).required().messages({
+  'string.empty': 'Some required fields are missing',
+});
+
 const createUserBody = Joi.object({
   displayName: Joi.string().min(8).required(),
   email: Joi.string().pattern(emailRegex).required(),
@@ -30,4 +37,5 @@ module.exports = {
   loginBody,
   createUserBody,
   createCategoryBody,
+  updatedPostBody,
 };

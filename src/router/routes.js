@@ -10,6 +10,7 @@ const {
 const { 
   validateNewCategory,
 } = require('../middlewares/category.middleware');
+const { validatePostAuthor, validateUpdatedPost } = require('../middlewares/blogPost.middleware');
 
 const router = express.Router();
 
@@ -22,6 +23,8 @@ router.use(authMiddleware);
 router.get('/user/:id', userController.getUserById);
 
 router.get('/post/:id', blogPostController.getPostById);
+
+router.put('/post/:id', validatePostAuthor, validateUpdatedPost, blogPostController.updatePost);
 
 router.post('/categories', validateNewCategory, categoryController.createCategory);
 
