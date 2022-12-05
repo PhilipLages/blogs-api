@@ -10,7 +10,7 @@ const getAllPosts = async () => {
     {
       model: Category,
       as: 'categories',
-      required: true,
+      through: { attributes: [] },
     },
   ],
   });
