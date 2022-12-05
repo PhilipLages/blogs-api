@@ -63,9 +63,10 @@ const getPostBySearchTerm = async (req, res) => {
 
 const createPost = async (req, res) => {
   const newPost = req.body;
+  const { userId } = req;
 
   try {
-    const { status, result } = await blogPostService.createPost(newPost);
+    const { status, result } = await blogPostService.createPost(userId, newPost);
 
     return res.status(status).json(result);
   } catch (error) {

@@ -1,5 +1,6 @@
 const { Op } = require('sequelize');
-const { BlogPost, User, Category } = require('../models');
+const { BlogPost, User, Category, PostCategory } = require('../models');
+const validateCategories = require('../utils');
 
 const getAllPosts = async () => {
   const result = await BlogPost.findAll({
@@ -107,8 +108,24 @@ const getPostBySearchTerm = async (term) => {
   return { status: 200, result };
 };
 
-const createPost = async ({ title, content, CategoryIds }) => {
-  
+const createPost = async (userId, { title, content, categoryIds }) => {
+  const categories = await Category.findAll(); 
+
+  const checkedCategories = validateCategories(categories, categoryIds);
+
+  if (checkedCategories.length) {
+    return { status: 400, result: { message: 'one or more "categoryIds" not found' } };
+  }
+
+  const result = await BlogPost.create({ title, content, userId });
+  const { id } = result;
+
+  await Promise.all(categoryIds.map((categoryId) => PostCategory.create({ 
+    categoryId,
+    postId: id,
+  })));
+
+  return { status: 201, result };
 };
 
 module.exports = {

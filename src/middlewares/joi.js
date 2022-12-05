@@ -36,10 +36,10 @@ const createCategoryBody = Joi.object({
 const newPostBody = Joi.object({
   title: Joi.string().required(),
   content: Joi.string().required(),
-  categoryIds: Joi.array().required(),
+  categoryIds: Joi.array().min(1).required(),
 }).required().messages({
   'string.empty': 'Some required fields are missing',
-  'array.empty': 'one or more {$label} not found',
+  'array.min': '{#label} must have at least {#limit} id',
 });
 
 module.exports = {
