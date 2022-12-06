@@ -48,13 +48,13 @@ const getPostById = async (id) => {
 };
 
 const updatePost = async (id, userId, { title, content }) => {
-  const result = await BlogPost.findByPk(id);
+  const check = await BlogPost.findByPk(id);
 
-  if (!result) {
+  if (!check) {
     return { status: 404, result: { message: 'Post does not exist' } };
   }
 
-  if (result.userId !== userId) {
+  if (check.userId !== userId) {
     return { status: 401, result: { message: 'Unauthorized user' } };
   }
   
@@ -66,11 +66,9 @@ const updatePost = async (id, userId, { title, content }) => {
     where: { id },
    });
 
-   const updatedPost = await getPostById(id);
+   const { result } = await getPostById(id);
 
-   console.log(updatedPost.result.title);
-
-  return { status: 200, result: updatedPost };
+  return { status: 200, result };
 };
 
 const deletePost = async (id, userId) => {
