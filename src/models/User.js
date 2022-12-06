@@ -5,6 +5,7 @@ const UserModel = (sequelize, DataTypes) => {
     id: { 
       type: DataTypes.INTEGER,
       primaryKey: true,
+      onDelete: 'CASCADE',
       autoIncrement: true
     },
     displayName: DataTypes.STRING,
@@ -22,7 +23,7 @@ const UserModel = (sequelize, DataTypes) => {
 
   user.associate = (models) => {
     user.hasMany(models.BlogPost, 
-      { foreignKey: 'userId', as: 'blog_posts' });
+      { foreignKey: 'userId', as: 'blog_posts', onDelete: 'CASCADE'  });
   };
 
   return user;

@@ -68,6 +68,8 @@ const updatePost = async (id, userId, { title, content }) => {
 
    const updatedPost = await getPostById(id);
 
+   console.log(updatedPost.result.title);
+
   return { status: 200, result: updatedPost };
 };
 

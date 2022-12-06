@@ -19,7 +19,7 @@ const getAllCategories = async () => {
     return { status: 400, result: { message: 'No categories found' } };
   }
 
-  return { status: 201, result };  
+  return { status: 200, result };  
 }; 
 
 module.exports = {

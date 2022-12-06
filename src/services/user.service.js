@@ -44,7 +44,7 @@ const getUserById = async (id) => {
   const result = await User.findOne({ where: { id } });
 
   if (!result) {
-    return { status: 404, result: { message: 'User dos not exist' } };
+    return { status: 404, result: { message: 'User does not exist' } };
   }
 
   return { status: 200, result };
